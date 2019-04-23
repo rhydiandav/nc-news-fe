@@ -1,0 +1,16 @@
+@media only screen and (min-width: 768px) {
+  .articles {
+    display: grid;
+    grid-template-columns: 10% 60% 20% 10%;
+    grid-template-areas: 'left-panel article-list topic-key right-panel';
+  }
+
+  .topic-key {
+    grid-area: topic-key;
+    height: 30%;
+  }
+
+  .article-list {
+    grid-area: article-list;
+  }
+}

@@ -1,0 +1,13 @@
+.subheader {
+  background-color: #c4404f;
+  color: #202829;
+  padding: 1%;
+  margin-bottom: 2%;
+}
+
+@media only screen and (min-width: 768px) {
+  .subheader {
+    padding: 0.2%;
+    margin-bottom: 0.5%;
+  }
+}
