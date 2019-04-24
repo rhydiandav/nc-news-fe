@@ -52,3 +52,7 @@ export const postNewComment = (article_id, commentToPost) => {
 export const deleteArticle = article_id => {
   return axios.delete(`${url}/articles/${article_id}`);
 };
+
+export const deleteComment = comment_id => {
+  return axios.delete(`${url}/comments/${comment_id}`);
+};

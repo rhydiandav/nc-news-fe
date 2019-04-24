@@ -19,6 +19,14 @@ export default class ArticleCard extends Component {
       });
   }
 
+  componentDidUpdate() {
+    fetch(`http://n-c-news.herokuapp.com/api/articles/${this.props.id}`)
+      .then(res => res.json())
+      .then(({ article }) => {
+        this.setState({ article });
+      });
+  }
+
   render() {
     return (
       <div className="article content-card">
