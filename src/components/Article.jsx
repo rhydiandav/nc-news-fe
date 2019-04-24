@@ -9,7 +9,7 @@ const Article = props => {
       <div className="content-card">
         <h3>Comments:</h3>
       </div>
-      <Comments id={props.id} />
+      <Comments id={props.id} loggedInUser={props.loggedInUser} />
     </>
   );
 };

@@ -9,11 +9,12 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Users from './components/Users';
 import User from './components/User';
+import PostArticle from './components/PostArticle';
 
 class App extends React.Component {
   state = {
     currentTopic: 'front-page',
-    loggedInUser: ''
+    loggedInUser: localStorage.loggedInUser || ''
   };
 
   setCurrentTopic = currentTopic => {
@@ -22,10 +23,12 @@ class App extends React.Component {
 
   logIn = username => {
     this.setState({ loggedInUser: username });
+    localStorage.setItem('loggedInUser', username);
   };
 
   logOut = () => {
     this.setState({ loggedInUser: '' });
+    localStorage.removeItem('loggedInUser');
   };
 
   render() {
@@ -38,9 +41,16 @@ class App extends React.Component {
         />
         <SubHeader topic={this.state.currentTopic} />
         <Router className="router">
-          <Articles path="/" />
+          <Articles path="/" loggedInUser={this.state.loggedInUser} />
           <Articles path="/topics/:slug" />
-          <Article path="/articles/:id" />
+          <PostArticle
+            path="/articles/new"
+            loggedInUser={this.state.loggedInUser}
+          />
+          <Article
+            path="/articles/:id"
+            loggedInUser={this.state.loggedInUser}
+          />
           <Login path="/login" logIn={this.logIn} />
           <Users path="/users" />
           <User path="/users/:username" />

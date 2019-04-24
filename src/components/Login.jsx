@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getUser } from '../api';
+import { navigate } from '@reach/router';
 
 export default class Login extends Component {
   state = { usernameInput: '' };
@@ -13,6 +14,7 @@ export default class Login extends Component {
     getUser(this.state.usernameInput).then(({ user }) => {
       if (user) {
         this.props.logIn(user.username);
+        navigate(`/users/${user.username}`);
       } else {
         alert('Username not found');
       }

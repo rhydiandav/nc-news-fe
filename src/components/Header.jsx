@@ -35,19 +35,6 @@ export default class Header extends Component {
           <Link to="/users">Users</Link>
         </nav>
 
-        <select name="article-select" className="article-select">
-          <option value="front-page" onClick={this.handleClick}>
-            Front Page
-          </option>
-          {this.state.topics.map(({ slug }) => {
-            return (
-              <option key={slug} value={slug} onClick={this.handleClick}>
-                {`${slug[0].toUpperCase()}${slug.slice(1)}`}
-              </option>
-            );
-          })}
-        </select>
-
         {!this.props.loggedInUser && (
           <button
             onClick={() => {
@@ -66,6 +53,19 @@ export default class Header extends Component {
             Log Out
           </button>
         )}
+
+        <select name="article-select" className="article-select">
+          <option value="front-page" onClick={this.handleClick}>
+            Front Page
+          </option>
+          {this.state.topics.map(({ slug }) => {
+            return (
+              <option key={slug} value={slug} onClick={this.handleClick}>
+                {`${slug[0].toUpperCase()}${slug.slice(1)}`}
+              </option>
+            );
+          })}
+        </select>
       </div>
     );
   }

@@ -20,12 +20,21 @@
   background: none;
 }
 
+.header select {
+  /* width: 20%; */
+  background-color: #202829;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  text-align: right;
+}
+
 @media only screen and (min-width: 768px) {
   .header {
     padding: 0.2%;
   }
   select {
-    width: 10vw;
+    width: 15vw;
     /* margin-left: 50%; */
   }
 }

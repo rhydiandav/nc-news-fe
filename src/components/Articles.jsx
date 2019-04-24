@@ -33,11 +33,19 @@ export default class ArticleList extends Component {
     const slug = this.props.slug ? this.props.slug : 'front-page';
     return (
       <div className="articles">
-        <TopicCard slug={slug} total_count={this.state.total_count} />
+        <TopicCard
+          slug={slug}
+          total_count={this.state.total_count}
+          loggedInUser={this.props.loggedInUser}
+        />
         <div className="article-list">
           {this.state.articles.map(article => {
             return (
-              <ArticleListCard article={article} key={article.article_id} />
+              <ArticleListCard
+                article={article}
+                key={article.article_id}
+                loggedInUser={this.props.loggedInUser}
+              />
             );
           })}
         </div>

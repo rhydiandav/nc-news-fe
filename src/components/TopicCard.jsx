@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { fetchTopic } from '../api';
+import { Link } from '@reach/router';
 
 export default class TopicCard extends Component {
   state = {
@@ -42,6 +43,10 @@ export default class TopicCard extends Component {
         <p>Total articles: {this.props.total_count}</p>
         <p>All articles...</p>
         <p>Sort by: </p>
+
+        <Link to="/articles/new">
+          {this.props.loggedInUser && <button>New Article</button>}
+        </Link>
       </div>
     );
   }

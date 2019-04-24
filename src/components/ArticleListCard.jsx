@@ -2,15 +2,12 @@ import React from 'react';
 import { Link } from '@reach/router';
 import '../index.css';
 import '../styles/ArticleCard.css';
+import VotePanel from './VotePanel';
 
 const ArticleCard = props => {
   return (
     <div className="article-list-card content-card">
-      <div className="vote-panel">
-        <p>^</p>
-        <p>{props.article.votes}</p>
-        <p>v</p>
-      </div>
+      <VotePanel item={props.article} loggedInUser={props.loggedInUser} />
       <div className="article-details">
         <p>
           Posted by {props.article.author} on{' '}

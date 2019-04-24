@@ -1,0 +1,26 @@
+.vote-button {
+  border: none;
+  text-decoration: none;
+  background: none;
+  color: black;
+  text-align: center;
+}
+
+.vote-button:disabled {
+  border: none;
+  text-decoration: none;
+  background: none;
+  color: grey;
+  text-align: center;
+}
+.vote-button:disabled:hover {
+  border: none;
+  text-decoration: none;
+  background: none;
+  color: grey;
+  text-align: center;
+}
+
+.vote-button:hover {
+  color: red;
+}

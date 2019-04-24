@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const url = 'http://n-c-news.herokuapp.com/api';
 
 export const fetchTopic = slug => {
@@ -14,4 +16,25 @@ export const getUsers = () => {
 
 export const getUser = username => {
   return fetch(`${url}/users/${username}`).then(res => res.json());
+};
+
+export const vote = (item, amount) => {
+  return axios
+    .patch(
+      `${url}/${item.article_id ? 'articles' : 'comments'}/${
+        item.article_id ? item.article_id : item.comment_id
+      }`,
+      { inc_votes: amount }
+    )
+    .then(({ data: { article } }) => {
+      return article;
+    });
+};
+
+export const postNewArticle = article => {
+  return axios
+    .post(`${url}/articles`, article)
+    .then(({ data: { article } }) => {
+      return article;
+    });
 };
