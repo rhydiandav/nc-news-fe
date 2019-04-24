@@ -7,6 +7,8 @@ import Article from './components/Article';
 import Articles from './components/Articles';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Users from './components/Users';
+import User from './components/User';
 
 class App extends React.Component {
   state = {
@@ -40,6 +42,8 @@ class App extends React.Component {
           <Articles path="/topics/:slug" />
           <Article path="/articles/:id" />
           <Login path="/login" logIn={this.logIn} />
+          <Users path="/users" />
+          <User path="/users/:username" />
         </Router>
         <Footer />
       </div>

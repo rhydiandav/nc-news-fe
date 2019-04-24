@@ -8,6 +8,10 @@ export const fetchComments = id => {
   return fetch(`${url}/articles/${id}/comments`).then(res => res.json());
 };
 
+export const getUsers = () => {
+  return fetch(`${url}/users`).then(res => res.json());
+};
+
 export const getUser = username => {
   return fetch(`${url}/users/${username}`).then(res => res.json());
 };

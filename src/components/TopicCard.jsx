@@ -8,10 +8,12 @@ export default class TopicCard extends Component {
 
   componentDidMount() {
     if (this.props.slug === 'front-page') {
-      console.log('front page');
+      this.setState({
+        topic: { slug: 'front-page', description: 'All topics...' }
+      });
     } else {
-      fetchTopic(this.props.slug).then(topic => {
-        console.log(topic);
+      fetchTopic(this.props.slug).then(({ topic }) => {
+        this.setState({ topic });
       });
     }
   }

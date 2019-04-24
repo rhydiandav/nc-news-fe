@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { getUsers } from '../api';
+import UserListCard from './UserListCard';
 
-const Users = () => {
-  return <div>Users</div>;
-};
+export default class Users extends Component {
+  state = {
+    users: []
+  };
 
-export default Users;
+  componentDidMount() {
+    getUsers().then(({ users }) => this.setState({ users }));
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Users</h3>
+        {this.state.users.map(user => {
+          return <UserListCard user={user} key={user.username} />;
+        })}
+      </div>
+    );
+  }
+}
