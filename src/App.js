@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Users from './components/Users';
 import User from './components/User';
 import PostArticle from './components/PostArticle';
+import NewUser from './components/NewUser';
 
 class App extends React.Component {
   state = {
@@ -54,6 +55,7 @@ class App extends React.Component {
           <Login path="/login" logIn={this.logIn} />
           <Users path="/users" />
           <User path="/users/:username" />
+          <NewUser path="/users/new" />
         </Router>
         <Footer />
       </div>

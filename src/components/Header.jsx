@@ -36,13 +36,22 @@ export default class Header extends Component {
         </nav>
 
         {!this.props.loggedInUser && (
-          <button
-            onClick={() => {
-              navigate('/login');
-            }}
-          >
-            Log In
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Log In
+            </button>
+            <button
+              onClick={() => {
+                navigate('/users/new');
+              }}
+            >
+              Sign Up
+            </button>
+          </div>
         )}
         {this.props.loggedInUser && (
           <button

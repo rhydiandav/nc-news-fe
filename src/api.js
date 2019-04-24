@@ -31,10 +31,24 @@ export const vote = (item, amount) => {
     });
 };
 
-export const postNewArticle = article => {
+export const postNewArticle = articleToPost => {
   return axios
-    .post(`${url}/articles`, article)
+    .post(`${url}/articles`, articleToPost)
     .then(({ data: { article } }) => {
       return article;
     });
+};
+
+export const postNewComment = (article_id, commentToPost) => {
+  return axios
+    .post(`${url}/articles/${article_id}/comments`, {
+      ...commentToPost
+    })
+    .then(({ data: { comment } }) => {
+      return comment;
+    });
+};
+
+export const deleteArticle = article_id => {
+  return axios.delete(`${url}/articles/${article_id}`);
 };

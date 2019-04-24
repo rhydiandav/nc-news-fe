@@ -12,13 +12,13 @@ export default class PostArticle extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { title, body, topic } = this.state;
-    const article = {
+    const articleToPost = {
       title,
       body,
       topic,
       author: this.props.loggedInUser
     };
-    postNewArticle(article).then(article => {
+    postNewArticle(articleToPost).then(article => {
       this.setState({
         topic: 'coding',
         title: '',

@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import { deleteArticle } from '../api';
+import { navigate } from '@reach/router';
 
 export default class ArticleCard extends Component {
   state = { article: {} };
+
+  handleDelete = e => {
+    deleteArticle(this.props.id).then(res => {
+      navigate('/');
+    });
+  };
 
   componentDidMount() {
     fetch(`http://n-c-news.herokuapp.com/api/articles/${this.props.id}`)
@@ -22,6 +30,9 @@ export default class ArticleCard extends Component {
         <h3>{this.state.article.title}</h3>
         <p>{this.state.article.body}</p>
         <p>Comments: {this.state.article.comment_count}</p>
+        {this.props.loggedInUser === this.state.article.author && (
+          <button onClick={this.handleDelete}>Delete</button>
+        )}
       </div>
     );
   }
