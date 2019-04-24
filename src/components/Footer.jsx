@@ -1,10 +1,10 @@
 import React from 'react';
-import '../index.css';
+import '../styles/Footer.css';
 
 const Footer = () => {
   return (
     <div className="footer">
-      <p>Footer...</p>
+      <p>NC News by Rhydian Davies</p>
     </div>
   );
 };

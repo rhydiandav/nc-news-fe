@@ -1,9 +1,23 @@
 .header {
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 60% 20% 20%;
   background-color: #202829;
   color: white;
   padding: 1%;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+
+.header button {
+  width: 50%;
+}
+
+.header mark {
+  color: #c4404f;
+  background: none;
 }
 
 @media only screen and (min-width: 768px) {
@@ -12,6 +26,6 @@
   }
   select {
     width: 10vw;
-    margin-left: 70%;
+    margin-left: 50%;
   }
 }

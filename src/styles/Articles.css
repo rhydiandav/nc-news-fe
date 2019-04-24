@@ -7,10 +7,12 @@
 
   .topic-key {
     grid-area: topic-key;
-    height: 30%;
+    max-height: 35vh;
+    width: 95%;
   }
 
   .article-list {
     grid-area: article-list;
+    width: 95%;
   }
 }
