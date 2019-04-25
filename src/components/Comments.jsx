@@ -15,13 +15,13 @@ export default class Comments extends Component {
   };
 
   componentDidMount() {
-    fetchComments(this.props.id).then(({ comments, comment }) => {
+    fetchComments(this.props.id).then(({ data: { comments, comment } }) => {
       this.setState({ comments: comments || [comment] });
     });
   }
 
   componentDidUpdate() {
-    fetchComments(this.props.id).then(({ comments, comment }) => {
+    fetchComments(this.props.id).then(({ data: { comments, comment } }) => {
       this.setState({ comments: comments || [comment] });
     });
   }

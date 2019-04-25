@@ -13,7 +13,7 @@ export default class TopicCard extends Component {
         topic: { slug: 'front-page', description: 'All topics...' }
       });
     } else {
-      fetchTopic(this.props.slug).then(({ topic }) => {
+      fetchTopic(this.props.slug).then(({ data: { topic } }) => {
         this.setState({ topic });
       });
     }
@@ -26,7 +26,7 @@ export default class TopicCard extends Component {
           topic: { slug: 'front-page', description: 'All topics...' }
         });
       } else {
-        fetchTopic(this.props.slug).then(({ topic }) => {
+        fetchTopic(this.props.slug).then(({ data: { topic } }) => {
           this.setState({ topic });
         });
       }

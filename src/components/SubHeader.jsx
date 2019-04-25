@@ -5,8 +5,9 @@ const SubHeader = props => {
   return (
     <div className="subheader">
       <h2>
-        {props.topic[0].toUpperCase()}
-        {props.topic.slice(1)}
+        {props.topic
+          ? props.topic[0].toUpperCase() + props.topic.slice(1)
+          : ' '}
       </h2>
     </div>
   );

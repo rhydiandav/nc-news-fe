@@ -1,11 +1,13 @@
 import React from 'react';
 import SubHeader from '../components/SubHeader';
 
-const Error = () => {
+const Error = props => {
   return (
     <>
       <SubHeader topic="Error" />
-      <div className="content-card">Page not found</div>
+      <div className="content-card">
+        {props.location.state ? props.location.state.msg : 'Page not found'}
+      </div>
     </>
   );
 };

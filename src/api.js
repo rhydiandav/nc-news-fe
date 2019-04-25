@@ -3,19 +3,19 @@ import axios from 'axios';
 const url = 'http://n-c-news.herokuapp.com/api';
 
 export const fetchTopic = slug => {
-  return fetch(`${url}/topics/${slug}`).then(res => res.json());
+  return axios.get(`${url}/topics/${slug}`);
 };
 
 export const fetchComments = id => {
-  return fetch(`${url}/articles/${id}/comments`).then(res => res.json());
+  return axios.get(`${url}/articles/${id}/comments`);
 };
 
 export const getUsers = () => {
-  return fetch(`${url}/users`).then(res => res.json());
+  return axios.get(`${url}/users`);
 };
 
 export const getUser = username => {
-  return fetch(`${url}/users/${username}`).then(res => res.json());
+  return axios.get(`${url}/users/${username}`);
 };
 
 export const vote = (item, amount) => {

@@ -55,7 +55,7 @@ class App extends React.Component {
           <Users path="/users" />
           <User path="/users/:username" />
           <NewUser path="/users/new" />
-          <Error default />
+          <Error path="/error" default />
         </Router>
         <Footer />
       </div>

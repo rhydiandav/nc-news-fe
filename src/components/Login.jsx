@@ -12,14 +12,14 @@ export default class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    getUser(this.state.usernameInput).then(({ user }) => {
-      if (user) {
+    getUser(this.state.usernameInput)
+      .then(({ data: { user } }) => {
         this.props.logIn(user.username);
         navigate(`/`);
-      } else {
-        alert('Username not found');
-      }
-    });
+      })
+      .catch(err => {
+        alert(err.response.data.msg);
+      });
   };
 
   render() {

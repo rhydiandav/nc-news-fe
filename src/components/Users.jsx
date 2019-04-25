@@ -9,7 +9,7 @@ export default class Users extends Component {
   };
 
   componentDidMount() {
-    getUsers().then(({ users }) => this.setState({ users }));
+    getUsers().then(({ data: { users } }) => this.setState({ users }));
   }
 
   render() {
