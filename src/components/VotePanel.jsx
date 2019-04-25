@@ -33,7 +33,11 @@ export default class VotePanel extends Component {
         >
           <i className="fas fa-caret-up" />
         </button>
-        <p>{this.props.item.votes + this.state.voteChange}</p>
+        <p>
+          {this.props.item.comment_id
+            ? this.props.item.votes
+            : this.props.item.votes + this.state.voteChange}
+        </p>
         <button
           className="vote-button"
           onClick={() => this.handleVoteClick(-1)}

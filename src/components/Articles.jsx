@@ -3,6 +3,7 @@ import '../index.css';
 import '../styles/Articles.css';
 import ArticleListCard from './ArticleListCard';
 import TopicCard from './TopicCard';
+import SubHeader from './SubHeader';
 
 export default class ArticleList extends Component {
   state = { articles: [], total_count: 0 };
@@ -32,24 +33,27 @@ export default class ArticleList extends Component {
   render() {
     const slug = this.props.slug ? this.props.slug : 'front-page';
     return (
-      <div className="articles">
-        <TopicCard
-          slug={slug}
-          total_count={this.state.total_count}
-          loggedInUser={this.props.loggedInUser}
-        />
-        <div className="article-list">
-          {this.state.articles.map(article => {
-            return (
-              <ArticleListCard
-                article={article}
-                key={article.article_id}
-                loggedInUser={this.props.loggedInUser}
-              />
-            );
-          })}
+      <>
+        <SubHeader topic={this.props.slug || 'Front Page'} />
+        <div className="articles">
+          <TopicCard
+            slug={slug}
+            total_count={this.state.total_count}
+            loggedInUser={this.props.loggedInUser}
+          />
+          <div className="article-list">
+            {this.state.articles.map(article => {
+              return (
+                <ArticleListCard
+                  article={article}
+                  key={article.article_id}
+                  loggedInUser={this.props.loggedInUser}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

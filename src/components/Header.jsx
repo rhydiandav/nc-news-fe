@@ -31,38 +31,6 @@ export default class Header extends Component {
           </h1>
         </Link>
 
-        <nav>
-          <Link to="/users">Users</Link>
-        </nav>
-
-        {!this.props.loggedInUser && (
-          <div>
-            <button
-              onClick={() => {
-                navigate('/login');
-              }}
-            >
-              Log In
-            </button>
-            <button
-              onClick={() => {
-                navigate('/users/new');
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
-        )}
-        {this.props.loggedInUser && (
-          <button
-            onClick={() => {
-              this.props.logOut();
-            }}
-          >
-            Log Out
-          </button>
-        )}
-
         <select name="article-select" className="article-select">
           <option value="front-page" onClick={this.handleClick}>
             Front Page
@@ -75,6 +43,47 @@ export default class Header extends Component {
             );
           })}
         </select>
+
+        {!this.props.loggedInUser && (
+          <div>
+            <button
+              className="red-button"
+              onClick={() => {
+                navigate('/users/new');
+              }}
+            >
+              Sign Up
+            </button>
+            <button
+              className="black-button"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Log In
+            </button>
+          </div>
+        )}
+        {this.props.loggedInUser && (
+          <div>
+            <button
+              className="black-button"
+              onClick={() => {
+                navigate(`/users/${this.props.loggedInUser}`);
+              }}
+            >
+              <i className="fas fa-user" />
+            </button>
+            <button
+              className="black-button"
+              onClick={() => {
+                this.props.logOut();
+              }}
+            >
+              Log Out
+            </button>
+          </div>
+        )}
       </div>
     );
   }

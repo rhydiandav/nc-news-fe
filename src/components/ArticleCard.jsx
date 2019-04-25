@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deleteArticle } from '../api';
-import { navigate } from '@reach/router';
+import { navigate, Link } from '@reach/router';
 
 export default class ArticleCard extends Component {
   state = { article: {} };
@@ -31,7 +31,11 @@ export default class ArticleCard extends Component {
     return (
       <div className="article content-card">
         <p>
-          Posted by {this.state.article.author} on{' '}
+          Posted by{' '}
+          <Link to={`/users/${this.state.article.author}`}>
+            {this.state.article.author}
+          </Link>{' '}
+          on{' '}
           {this.state.article.created_at &&
             this.state.article.created_at.slice(0, 10)}
         </p>

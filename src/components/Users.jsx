@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getUsers } from '../api';
 import UserListCard from './UserListCard';
+import SubHeader from './SubHeader';
 
 export default class Users extends Component {
   state = {
@@ -13,12 +14,14 @@ export default class Users extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Users</h3>
-        {this.state.users.map(user => {
-          return <UserListCard user={user} key={user.username} />;
-        })}
-      </div>
+      <>
+        <SubHeader topic="Users" />
+        <div>
+          {this.state.users.map(user => {
+            return <UserListCard user={user} key={user.username} />;
+          })}
+        </div>
+      </>
     );
   }
 }

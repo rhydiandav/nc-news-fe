@@ -2,7 +2,6 @@ import React from 'react';
 import { Router } from '@reach/router';
 import './App.css';
 import Header from './components/Header';
-import SubHeader from './components/SubHeader';
 import Article from './components/Article';
 import Articles from './components/Articles';
 import Footer from './components/Footer';
@@ -11,6 +10,7 @@ import Users from './components/Users';
 import User from './components/User';
 import PostArticle from './components/PostArticle';
 import NewUser from './components/NewUser';
+import Error from './components/Error';
 
 class App extends React.Component {
   state = {
@@ -40,7 +40,6 @@ class App extends React.Component {
           logOut={this.logOut}
           loggedInUser={this.state.loggedInUser}
         />
-        <SubHeader topic={this.state.currentTopic} />
         <Router className="router">
           <Articles path="/" loggedInUser={this.state.loggedInUser} />
           <Articles path="/topics/:slug" />
@@ -56,6 +55,7 @@ class App extends React.Component {
           <Users path="/users" />
           <User path="/users/:username" />
           <NewUser path="/users/new" />
+          <Error default />
         </Router>
         <Footer />
       </div>

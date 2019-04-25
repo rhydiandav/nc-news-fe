@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { postNewComment } from '../api';
+import { Link } from '@reach/router';
 
 export default class PostComment extends Component {
   state = {
@@ -24,11 +25,19 @@ export default class PostComment extends Component {
   render() {
     return (
       <div className="content-card">
-        <form onSubmit={this.handleSubmit}>
-          New Comment:{' '}
-          <input type="text" name="body" onChange={this.handleChange} />
-          <input type="submit" value="Post" />
-        </form>
+        {this.props.loggedInUser && (
+          <form onSubmit={this.handleSubmit}>
+            New Comment:{' '}
+            <input type="text" name="body" onChange={this.handleChange} />
+            <input type="submit" value="Post" />
+          </form>
+        )}
+        {!this.props.loggedInUser && (
+          <p>
+            You need to <Link to="/login">log in</Link> before you can post a
+            comment.
+          </p>
+        )}
       </div>
     );
   }
