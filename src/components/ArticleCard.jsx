@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { deleteArticle } from '../api';
+import { deleteArticle, fetchArticle } from '../api';
 import { navigate, Link } from '@reach/router';
 
 export default class ArticleCard extends Component {
@@ -12,18 +12,17 @@ export default class ArticleCard extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://n-c-news.herokuapp.com/api/articles/${this.props.id}`)
-      .then(res => res.json())
-      .then(({ article }) => {
+    fetchArticle(this.props.id)
+      .then(({ data: { article } }) => {
         this.setState({ article });
-      });
-  }
-
-  componentDidUpdate() {
-    fetch(`http://n-c-news.herokuapp.com/api/articles/${this.props.id}`)
-      .then(res => res.json())
-      .then(({ article }) => {
-        this.setState({ article });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
       });
   }
 

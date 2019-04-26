@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
+import { fetchComments } from '../api';
 import '../styles/Comments.css';
 import VotePanel from '../components/VotePanel';
 import { deleteComment } from '../api';
 import { Link } from '@reach/router';
 
 export default class Comments extends Component {
-  handleDelete = comment_id => {
-    deleteComment(comment_id);
-    this.props.handleCommentUpdate();
+  state = {
+    comments: []
   };
 
+  handleDelete = comment_id => {
+    deleteComment(comment_id);
+  };
+
+  componentDidMount() {
+    fetchComments(this.props.id).then(({ data: { comments, comment } }) => {
+      this.setState({ comments: comments || [comment] });
+    });
+  }
+
   render() {
+    console.log(this.state.comments);
     return (
-      this.props.comments &&
-      this.props.comments.map(comment => {
+      this.state.comments &&
+      this.state.comments.map(comment => {
         return (
           <div className="comment-card content-card" key={comment.comment_id}>
             <VotePanel item={comment} loggedInUser={this.props.loggedInUser} />

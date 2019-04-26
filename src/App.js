@@ -42,7 +42,10 @@ class App extends React.Component {
         />
         <Router className="router">
           <Articles path="/" loggedInUser={this.state.loggedInUser} />
-          <Articles path="/topics/:slug" />
+          <Articles
+            path="/topics/:slug"
+            loggedInUser={this.state.loggedInUser}
+          />
           <PostArticle
             path="/articles/new"
             loggedInUser={this.state.loggedInUser}
@@ -53,8 +56,11 @@ class App extends React.Component {
           />
           <Login path="/login" logIn={this.logIn} />
           <Users path="/users" />
-          <User path="/users/:username" />
-          <NewUser path="/users/new" />
+          <User
+            path="/users/:username"
+            loggedInUser={this.state.loggedInUser}
+          />
+          <NewUser path="/users/new" logIn={this.logIn} />
           <Error path="/error" default />
         </Router>
         <Footer />

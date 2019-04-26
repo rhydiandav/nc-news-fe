@@ -20,7 +20,6 @@ export default class PostComment extends Component {
     postNewComment(this.props.id, commentToPost).then(() => {
       this.setState({ body: '' });
     });
-    this.props.handleCommentUpdate();
   };
 
   render() {
@@ -29,12 +28,7 @@ export default class PostComment extends Component {
         {this.props.loggedInUser && (
           <form onSubmit={this.handleSubmit}>
             New Comment:{' '}
-            <input
-              type="text"
-              name="body"
-              onChange={this.handleChange}
-              value={this.state.body}
-            />
+            <input type="text" name="body" onChange={this.handleChange} />
             <input type="submit" value="Post" />
           </form>
         )}

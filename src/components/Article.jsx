@@ -1,21 +1,75 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ArticleCard from '../components/ArticleCard';
 import Comments from './Comments';
 import PostComment from './PostComment';
 import SubHeader from '../components/SubHeader';
+import { fetchComments } from '../api';
 
-const Article = props => {
-  return (
-    <>
-      <SubHeader topic="Article" />
-      <ArticleCard id={props.id} loggedInUser={props.loggedInUser} />
-      <div className="content-card">
-        <h3>Comments:</h3>
-      </div>
-      <Comments id={props.id} loggedInUser={props.loggedInUser} />
-      <PostComment id={props.id} loggedInUser={props.loggedInUser} />
-    </>
-  );
-};
+export default class Article extends Component {
+  state = { comments: [], commentsUpdated: false, p: 1 };
 
-export default Article;
+  componentDidMount() {
+    fetchComments(this.props.id, this.state.p).then(
+      ({ data: { comments, comment } }) => {
+        this.setState({ comments: comments || [comment] });
+      }
+    );
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (
+      this.state.commentsUpdated !== prevState.commentsUpdated ||
+      this.state.p !== prevState.p
+    ) {
+      fetchComments(this.props.id, this.state.p).then(
+        ({ data: { comments, comment } }) => {
+          this.setState({
+            comments: comments || [comment],
+            commentsUpdated: false
+          });
+        }
+      );
+    }
+  }
+
+  handleCommentUpdate = () => {
+    this.setState({ commentsUpdated: true });
+  };
+
+  handlePageChangeClick = direction => {
+    this.setState({ p: this.state.p + direction });
+  };
+
+  render() {
+    return (
+      <>
+        <SubHeader topic="Article" />
+        <ArticleCard
+          id={this.props.id}
+          loggedInUser={this.props.loggedInUser}
+        />
+        <div className="content-card">
+          <h3>Comments:</h3>
+          {this.state.p !== 1 && (
+            <button onClick={() => this.handlePageChangeClick(-1)}>
+              Prev Page
+            </button>
+          )}
+          <button onClick={() => this.handlePageChangeClick(1)}>
+            Next Page
+          </button>
+        </div>
+        <Comments
+          comments={this.state.comments}
+          loggedInUser={this.props.loggedInUser}
+          handleCommentUpdate={this.handleCommentUpdate}
+        />
+        <PostComment
+          id={this.props.id}
+          loggedInUser={this.props.loggedInUser}
+          handleCommentUpdate={this.handleCommentUpdate}
+        />
+      </>
+    );
+  }
+}

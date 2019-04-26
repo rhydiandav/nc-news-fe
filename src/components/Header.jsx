@@ -5,7 +5,7 @@ import '../styles/Header.css';
 export default class Header extends Component {
   state = { topics: [] };
 
-  handleClick = e => {
+  handleTopicChange = e => {
     this.props.setCurrentTopic(e.target.value);
     e.target.value === 'front-page'
       ? navigate('/')
@@ -31,13 +31,15 @@ export default class Header extends Component {
           </h1>
         </Link>
 
-        <select name="article-select" className="article-select">
-          <option value="front-page" onClick={this.handleClick}>
-            Front Page
-          </option>
+        <select
+          name="article-select"
+          className="article-select"
+          onChange={this.handleTopicChange}
+        >
+          <option value="front-page">Front Page</option>
           {this.state.topics.map(({ slug }) => {
             return (
-              <option key={slug} value={slug} onClick={this.handleClick}>
+              <option key={slug} value={slug}>
                 {`${slug[0].toUpperCase()}${slug.slice(1)}`}
               </option>
             );
@@ -72,7 +74,7 @@ export default class Header extends Component {
                 navigate(`/users/${this.props.loggedInUser}`);
               }}
             >
-              <i className="fas fa-user" />
+              <i className="fas fa-user" /> {this.props.loggedInUser}
             </button>
             <button
               className="black-button"

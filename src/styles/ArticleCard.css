@@ -1,6 +1,5 @@
 .article-list-card {
   width: 95%;
-  margin: 1%;
   padding: 0%;
   display: grid;
   grid-template-columns: 5% 95%;

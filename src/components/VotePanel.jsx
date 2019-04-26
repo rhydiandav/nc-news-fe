@@ -5,18 +5,23 @@ import '../styles/VotePanel.css';
 
 export default class VotePanel extends Component {
   state = {
+    votes: this.props.item.votes,
     voteChange: 0,
     isLoading: false
   };
 
   handleVoteClick = amount => {
     this.setState({ isLoading: true });
-    vote(this.props.item, amount).then(() =>
+    vote(this.props.item, amount).catch(() => {
+      alert('An error was encoutered, your vote was not registered.');
       this.setState(prevState => ({
-        voteChange: prevState.voteChange + amount,
-        isLoading: false
-      }))
-    );
+        voteChange: prevState.voteChange - amount
+      }));
+    });
+    this.setState(prevState => ({
+      voteChange: prevState.voteChange + amount,
+      isLoading: false
+    }));
   };
 
   render() {
@@ -33,11 +38,7 @@ export default class VotePanel extends Component {
         >
           <i className="fas fa-caret-up" />
         </button>
-        <p>
-          {this.props.item.comment_id
-            ? this.props.item.votes
-            : this.props.item.votes + this.state.voteChange}
-        </p>
+        <p>{this.state.votes + this.state.voteChange}</p>
         <button
           className="vote-button"
           onClick={() => this.handleVoteClick(-1)}

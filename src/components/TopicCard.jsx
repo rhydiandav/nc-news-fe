@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
 import { fetchTopic } from '../api';
-import { Link } from '@reach/router';
 
 export default class TopicCard extends Component {
   state = {
-    topic: { slug: 'front-page', description: 'All topics...' }
+    topic: { slug: 'Front Page', description: 'All topics...' }
   };
 
-  componentDidMount() {
+  getTopicDetails = () => {
     if (this.props.slug === 'front-page') {
       this.setState({
-        topic: { slug: 'front-page', description: 'All topics...' }
+        topic: { slug: 'Front Page', description: 'All topics...' }
       });
     } else {
       fetchTopic(this.props.slug).then(({ data: { topic } }) => {
         this.setState({ topic });
       });
     }
+  };
+
+  componentDidMount() {
+    this.getTopicDetails();
   }
 
   componentDidUpdate(prevState) {
     if (prevState.slug !== this.props.slug) {
-      if (this.props.slug === 'front-page') {
-        this.setState({
-          topic: { slug: 'front-page', description: 'All topics...' }
-        });
-      } else {
-        fetchTopic(this.props.slug).then(({ data: { topic } }) => {
-          this.setState({ topic });
-        });
-      }
+      this.getTopicDetails();
     }
   }
 
@@ -41,12 +36,6 @@ export default class TopicCard extends Component {
         )}`}</h3>
         <h4>{`${this.state.topic.description}`}</h4>
         <p>Total articles: {this.props.total_count}</p>
-        <p>All articles...</p>
-        <p>Sort by: </p>
-
-        <Link to="/articles/new">
-          {this.props.loggedInUser && <button>New Article</button>}
-        </Link>
       </div>
     );
   }

@@ -2,17 +2,14 @@
   .articles {
     display: grid;
     grid-template-columns: 10% 60% 20% 10%;
-    grid-template-areas: 'left-panel article-list topic-key right-panel';
+    grid-template-areas: 'left-panel article-list sidebar right-panel';
   }
 
-  .topic-key {
-    grid-area: topic-key;
-    max-height: 35vh;
-    width: 95%;
+  .sidebar {
+    grid-area: sidebar;
   }
 
   .article-list {
     grid-area: article-list;
-    width: 95%;
   }
 }

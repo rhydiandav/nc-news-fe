@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { postNewArticle } from '../api';
 import { navigate } from '@reach/router';
 import SubHeader from './SubHeader';
+import { fetchTopics } from '../api';
 
 export default class PostArticle extends Component {
   state = {
     topic: 'coding',
     title: '',
-    body: ''
+    body: '',
+    topics: []
   };
 
   handleSubmit = e => {
@@ -33,6 +35,12 @@ export default class PostArticle extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  componentDidMount() {
+    fetchTopics().then(({ data: { topics } }) => {
+      this.setState({ topics });
+    });
+  }
+
   render() {
     return (
       <>
@@ -41,9 +49,13 @@ export default class PostArticle extends Component {
           <form onSubmit={this.handleSubmit}>
             Topic:{' '}
             <select name="topic" onChange={this.handleChange}>
-              <option value="coding">Coding</option>
-              <option value="cooking">Cooking</option>
-              <option value="football">Football</option>
+              {this.state.topics.map(({ slug }) => {
+                return (
+                  <option value={slug} key={slug}>
+                    {slug[0].toUpperCase() + slug.slice(1)}
+                  </option>
+                );
+              })}
             </select>
             Title:{' '}
             <input type="text" name="title" onChange={this.handleChange} />
