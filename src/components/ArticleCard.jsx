@@ -14,9 +14,9 @@ const ArticleCard = props => {
       <h3>{props.article.title}</h3>
       <p>{props.article.body}</p>
       <p>Comments: {props.article.comment_count}</p>
-      {/* {props.loggedInUser === props.article.author && ( */}
-      <button onClick={props.handleDelete}>Delete</button>
-      {/* )} */}
+      {props.loggedInUser === props.article.author && (
+        <button onClick={props.handleDelete}>Delete</button>
+      )}
     </div>
   );
 };

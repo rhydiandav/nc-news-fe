@@ -40,15 +40,17 @@ export default class Articles extends Component {
       prevState.sort_by !== this.state.sort_by ||
       prevState.order !== this.state.order
     ) {
+      const page = prevProps.slug !== this.props.slug ? 1 : this.state.p;
+
       const params = {
-        p: this.state.p,
+        p: page,
         sort_by: this.state.sort_by,
         order: this.state.order
       };
       if (this.props.slug) params.topic = this.props.slug;
 
       fetchArticles(params).then(({ data: { total_count, articles } }) => {
-        this.setState({ articles, total_count });
+        this.setState({ articles, total_count, p: page });
       });
     }
   }

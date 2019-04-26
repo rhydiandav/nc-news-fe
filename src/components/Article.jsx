@@ -67,6 +67,7 @@ export default class Article extends Component {
         <ArticleCard
           article={this.state.article}
           handleDelete={this.handleDelete}
+          loggedInUser={this.props.loggedInUser}
         />
         <div className="content-card">
           <h3>Comments:</h3>

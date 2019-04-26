@@ -42,7 +42,6 @@ export default class User extends Component {
 
     fetchArticles({ author: this.props.username }).then(
       ({ data: { articles, article, total_count } }) => {
-        console.log(article);
         this.setState({ articles: articles || [article], total_count });
       }
     );

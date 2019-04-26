@@ -14,7 +14,6 @@ export const fetchArticles = params => {
 
     paramString = paramString.slice(0, -1);
   }
-  console.log(paramString);
   return axios.get(`${url}/articles${paramString}`);
 };
 
