@@ -3,12 +3,32 @@ import ArticleCard from '../components/ArticleCard';
 import Comments from './Comments';
 import PostComment from './PostComment';
 import SubHeader from '../components/SubHeader';
-import { fetchComments } from '../api';
+import { fetchComments, fetchArticle, deleteArticle } from '../api';
+import { navigate } from '@reach/router';
 
 export default class Article extends Component {
-  state = { comments: [], commentsUpdated: false, p: 1 };
+  state = { comments: [], commentsUpdated: false, p: 1, article: {} };
+
+  handleDelete = e => {
+    deleteArticle(this.props.id).then(res => {
+      navigate('/');
+    });
+  };
 
   componentDidMount() {
+    fetchArticle(this.props.id)
+      .then(({ data: { article } }) => {
+        this.setState({ article });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
+
     fetchComments(this.props.id, this.state.p).then(
       ({ data: { comments, comment } }) => {
         this.setState({ comments: comments || [comment] });
@@ -45,8 +65,8 @@ export default class Article extends Component {
       <>
         <SubHeader topic="Article" />
         <ArticleCard
-          id={this.props.id}
-          loggedInUser={this.props.loggedInUser}
+          article={this.state.article}
+          handleDelete={this.handleDelete}
         />
         <div className="content-card">
           <h3>Comments:</h3>
@@ -55,9 +75,12 @@ export default class Article extends Component {
               Prev Page
             </button>
           )}
-          <button onClick={() => this.handlePageChangeClick(1)}>
-            Next Page
-          </button>
+          {this.state.p !==
+            Math.ceil(this.state.article.comment_count / 10) && (
+            <button onClick={() => this.handlePageChangeClick(1)}>
+              Next Page
+            </button>
+          )}
         </div>
         <Comments
           comments={this.state.comments}
