@@ -9,10 +9,6 @@
   height: 100%;
 }
 
-.user-info {
-  text-align: center;
-}
-
 @media only screen and (min-width: 768px) {
   .articles {
     display: grid;

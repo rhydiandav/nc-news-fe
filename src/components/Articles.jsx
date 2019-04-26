@@ -4,7 +4,7 @@ import '../styles/Articles.css';
 import ArticleListCard from './ArticleListCard';
 import TopicCard from './TopicCard';
 import SubHeader from './SubHeader';
-import { Link } from '@reach/router';
+import ArticleNavigation from './ArticleNavigation';
 
 export default class Articles extends Component {
   state = {
@@ -67,32 +67,14 @@ export default class Articles extends Component {
               loggedInUser={this.props.loggedInUser}
             />
 
-            <div className="content-card article-navigation">
-              <Link to="/articles/new">
-                {this.props.loggedInUser && <button>New Article</button>}
-              </Link>
-
-              {this.state.p !== 1 && (
-                <button onClick={() => this.handlePageChangeClick(-1)}>
-                  Prev Page
-                </button>
-              )}
-              {this.state.p !== Math.ceil(this.state.total_count / 10) && (
-                <button onClick={() => this.handlePageChangeClick(1)}>
-                  Next Page
-                </button>
-              )}
-              <select name="sort_by" onChange={this.handleSortByChange}>
-                <option value="created_at">Date Created</option>
-                <option value="author">User</option>
-                <option value="title">Title</option>
-                <option value="comment_count">Number of Comments</option>
-              </select>
-              <select name="order" onChange={this.handleOrderChange}>
-                <option value="desc">Descending</option>
-                <option value="asc">Ascending</option>
-              </select>
-            </div>
+            <ArticleNavigation
+              loggedInUser={this.props.loggedInUser}
+              p={this.state.p}
+              total_count={this.state.total_count}
+              handlePageChangeClick={this.handlePageChangeClick}
+              handleSortByChange={this.handleSortByChange}
+              handleOrderChange={this.handleOrderChange}
+            />
           </div>
 
           <div className="article-list">
