@@ -10,9 +10,18 @@ export default class Article extends Component {
   state = { comments: [], commentsUpdated: false, p: 1, article: {} };
 
   handleDelete = e => {
-    deleteArticle(this.props.id).then(res => {
-      navigate('/');
-    });
+    deleteArticle(this.props.id)
+      .then(() => {
+        navigate('/');
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
   };
 
   componentDidMount() {
@@ -29,11 +38,20 @@ export default class Article extends Component {
         });
       });
 
-    fetchComments(this.props.id, this.state.p).then(
-      ({ data: { comments, comment } }) => {
-        this.setState({ comments: comments || [comment] });
-      }
-    );
+    fetchComments(this.props.id, this.state.p)
+      .then(({ data: { comments, comment } }) => {
+        this.setState({
+          comments: comments || [comment]
+        });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   componentDidUpdate(_, prevState) {
@@ -41,14 +59,21 @@ export default class Article extends Component {
       this.state.commentsUpdated !== prevState.commentsUpdated ||
       this.state.p !== prevState.p
     ) {
-      fetchComments(this.props.id, this.state.p).then(
-        ({ data: { comments, comment } }) => {
+      fetchComments(this.props.id, this.state.p)
+        .then(({ data: { comments, comment } }) => {
           this.setState({
             comments: comments || [comment],
             commentsUpdated: false
           });
-        }
-      );
+        })
+        .catch(err => {
+          navigate('/error', {
+            replace: true,
+            state: {
+              msg: err.response.data.msg
+            }
+          });
+        });
     }
   }
 

@@ -21,14 +21,23 @@ export default class PostArticle extends Component {
       topic,
       author: this.props.loggedInUser
     };
-    postNewArticle(articleToPost).then(article => {
-      this.setState({
-        topic: 'coding',
-        title: '',
-        body: ''
+    postNewArticle(articleToPost)
+      .then(article => {
+        this.setState({
+          topic: 'coding',
+          title: '',
+          body: ''
+        });
+        navigate(`/articles/${article.article_id}`);
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
       });
-      navigate(`/articles/${article.article_id}`);
-    });
   };
 
   handleChange = e => {
@@ -36,9 +45,18 @@ export default class PostArticle extends Component {
   };
 
   componentDidMount() {
-    fetchTopics().then(({ data: { topics } }) => {
-      this.setState({ topics });
-    });
+    fetchTopics()
+      .then(({ data: { topics } }) => {
+        this.setState({ topics });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   render() {
@@ -60,7 +78,11 @@ export default class PostArticle extends Component {
             Title:{' '}
             <input type="text" name="title" onChange={this.handleChange} />
             Body: <input type="text" name="body" onChange={this.handleChange} />
-            <input type="submit" value="Post" />
+            <input
+              type="submit"
+              value="Post"
+              disabled={!this.state.title || !this.state.body}
+            />
           </form>
         </div>
       </>

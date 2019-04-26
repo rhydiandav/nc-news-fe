@@ -35,34 +35,36 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header
-          setCurrentTopic={this.setCurrentTopic}
-          logOut={this.logOut}
-          loggedInUser={this.state.loggedInUser}
-        />
-        <Router className="router">
-          <Articles path="/" loggedInUser={this.state.loggedInUser} />
-          <Articles
-            path="/topics/:slug"
+        <div className="content-wrap">
+          <Header
+            setCurrentTopic={this.setCurrentTopic}
+            logOut={this.logOut}
             loggedInUser={this.state.loggedInUser}
           />
-          <PostArticle
-            path="/articles/new"
-            loggedInUser={this.state.loggedInUser}
-          />
-          <Article
-            path="/articles/:id"
-            loggedInUser={this.state.loggedInUser}
-          />
-          <Login path="/login" logIn={this.logIn} />
-          <Users path="/users" />
-          <User
-            path="/users/:username"
-            loggedInUser={this.state.loggedInUser}
-          />
-          <NewUser path="/users/new" logIn={this.logIn} />
-          <Error path="/error" default />
-        </Router>
+          <Router className="router">
+            <Articles path="/" loggedInUser={this.state.loggedInUser} />
+            <Articles
+              path="/topics/:slug"
+              loggedInUser={this.state.loggedInUser}
+            />
+            <PostArticle
+              path="/articles/new"
+              loggedInUser={this.state.loggedInUser}
+            />
+            <Article
+              path="/articles/:id"
+              loggedInUser={this.state.loggedInUser}
+            />
+            <Login path="/login" logIn={this.logIn} />
+            <Users path="/users" />
+            <User
+              path="/users/:username"
+              loggedInUser={this.state.loggedInUser}
+            />
+            <NewUser path="/users/new" logIn={this.logIn} />
+            <Error path="/error" default />
+          </Router>
+        </div>
         <Footer />
       </div>
     );

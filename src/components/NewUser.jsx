@@ -19,15 +19,24 @@ export default class NewUser extends Component {
       name
     };
 
-    postNewUser(userToAdd).then(user => {
-      this.setState({
-        username: '',
-        avatar_url: '',
-        name: ''
+    postNewUser(userToAdd)
+      .then(user => {
+        this.setState({
+          username: '',
+          avatar_url: '',
+          name: ''
+        });
+        this.props.logIn(user.username);
+        navigate(`/users/${user.username}`);
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
       });
-      this.props.logIn(user.username);
-      navigate(`/users/${user.username}`);
-    });
   };
 
   handleChange = e => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getUsers } from '../api';
 import UserListCard from './UserListCard';
 import SubHeader from './SubHeader';
+import { navigate } from '@reach/router';
 
 export default class Users extends Component {
   state = {
@@ -9,7 +10,16 @@ export default class Users extends Component {
   };
 
   componentDidMount() {
-    getUsers().then(({ data: { users } }) => this.setState({ users }));
+    getUsers()
+      .then(({ data: { users } }) => this.setState({ users }))
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   render() {

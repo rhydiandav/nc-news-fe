@@ -6,7 +6,12 @@ const ArticleNavigation = props => {
   return (
     <div className="content-card article-navigation">
       {props.loggedInUser && (
-        <button onClick={() => navigate('/articles/new')}>New Article</button>
+        <button
+          className="new-article"
+          onClick={() => navigate('/articles/new')}
+        >
+          New Article
+        </button>
       )}
 
       <div className="page-nav">
@@ -30,6 +35,8 @@ const ArticleNavigation = props => {
       </div>
 
       <div className="sort">
+        <p>Sort by:</p>
+
         <select name="sort_by" onChange={props.handleSortByChange}>
           <option value="created_at">Date Created</option>
           {!props.author && <option value="author">User</option>}
@@ -37,6 +44,7 @@ const ArticleNavigation = props => {
           <option value="comment_count">Number of Comments</option>
           <option value="votes">Number of Votes</option>
         </select>
+
         <select name="order" onChange={props.handleOrderChange}>
           <option value="desc">Descending</option>
           <option value="asc">Ascending</option>

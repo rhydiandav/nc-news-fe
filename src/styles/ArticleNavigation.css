@@ -1,10 +1,20 @@
 .article-navigation {
   display: grid;
   grid-template-columns: 100%;
+  margin-top: 1%;
 }
 
 .article-navigation button {
-  /* width: 30%; */
+  border: none;
+  font-size: 0.9em;
+  text-decoration: none;
+  background: none;
+  color: black;
+  text-align: center;
+}
+
+.article-navigation button:hover {
+  color: #c4404f;
 }
 
 .page-nav {
@@ -28,9 +38,12 @@
 
 .sort {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 33% 33%;
 }
 
 .sort select {
   width: 100%;
+  border: none;
+  font-size: 1em;
+  padding-right: 1%;
 }

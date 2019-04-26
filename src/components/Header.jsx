@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { navigate, Link } from '@reach/router';
 import '../styles/Header.css';
+import { fetchTopics } from '../api';
 
 export default class Header extends Component {
   state = { topics: [] };
@@ -13,23 +14,28 @@ export default class Header extends Component {
   };
 
   componentDidMount() {
-    fetch('http://n-c-news.herokuapp.com/api/topics')
-      .then(res => {
-        return res.json();
-      })
-      .then(({ topics }) => {
+    fetchTopics()
+      .then(({ data: { topics } }) => {
         this.setState({ topics });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
       });
   }
 
   render() {
     return (
       <div className="header">
-        <Link to="/">
-          <h1>
+        <h1>
+          <Link to="/">
             <mark>&#60;</mark> NC News <mark>/&#62;</mark>
-          </h1>
-        </Link>
+          </Link>{' '}
+        </h1>
 
         <select
           name="article-select"
@@ -47,7 +53,7 @@ export default class Header extends Component {
         </select>
 
         {!this.props.loggedInUser && (
-          <div>
+          <div className="account-buttons">
             <button
               className="red-button"
               onClick={() => {
@@ -67,7 +73,7 @@ export default class Header extends Component {
           </div>
         )}
         {this.props.loggedInUser && (
-          <div>
+          <div className="account-buttons">
             <button
               className="black-button"
               onClick={() => {

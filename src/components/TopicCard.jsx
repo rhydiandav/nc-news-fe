@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { fetchTopic } from '../api';
+import { navigate } from '@reach/router';
 
 export default class TopicCard extends Component {
   state = {
@@ -12,9 +13,18 @@ export default class TopicCard extends Component {
         topic: { slug: 'Front Page', description: 'All topics...' }
       });
     } else {
-      fetchTopic(this.props.slug).then(({ data: { topic } }) => {
-        this.setState({ topic });
-      });
+      fetchTopic(this.props.slug)
+        .then(({ data: { topic } }) => {
+          this.setState({ topic });
+        })
+        .catch(err => {
+          navigate('/error', {
+            replace: true,
+            state: {
+              msg: err.response.data.msg
+            }
+          });
+        });
     }
   };
 

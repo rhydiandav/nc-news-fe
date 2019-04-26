@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-columns: 60% 20% 20%;
+  grid-template-columns: 60% 40%;
   background-color: #202829;
   color: white;
   padding: 1%;
@@ -50,12 +50,19 @@
   font-size: 1em;
 }
 
+.account-buttons {
+  grid-column: 1 / span 2;
+}
+
 @media only screen and (min-width: 768px) {
   .header {
     padding: 0.2%;
+    grid-template-columns: 60% 20% 20%;
   }
   select {
     width: 15vw;
-    /* margin-left: 50%; */
+  }
+  .account-buttons {
+    grid-column: span 1;
   }
 }

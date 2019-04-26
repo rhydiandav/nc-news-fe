@@ -40,11 +40,18 @@ export default class User extends Component {
         });
       });
 
-    fetchArticles({ author: this.props.username }).then(
-      ({ data: { articles, article, total_count } }) => {
+    fetchArticles({ author: this.props.username })
+      .then(({ data: { articles, article, total_count } }) => {
         this.setState({ articles: articles || [article], total_count });
-      }
-    );
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   componentDidUpdate(_, prevState) {
@@ -60,11 +67,18 @@ export default class User extends Component {
         order: this.state.order
       };
 
-      fetchArticles(params).then(
-        ({ data: { total_count, articles, article } }) => {
+      fetchArticles(params)
+        .then(({ data: { total_count, articles, article } }) => {
           this.setState({ articles: articles || [article], total_count });
-        }
-      );
+        })
+        .catch(err => {
+          navigate('/error', {
+            replace: true,
+            state: {
+              msg: err.response.data.msg
+            }
+          });
+        });
     }
   }
 

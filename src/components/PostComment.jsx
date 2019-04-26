@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { postNewComment } from '../api';
-import { Link } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 
 export default class PostComment extends Component {
   state = {
@@ -13,13 +13,23 @@ export default class PostComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     const commentToPost = {
       username: this.props.loggedInUser,
       body: this.state.body
     };
-    postNewComment(this.props.id, commentToPost).then(() => {
-      this.setState({ body: '' });
-    });
+    postNewComment(this.props.id, commentToPost)
+      .then(() => {
+        this.setState({ body: '' });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
     this.props.handleCommentUpdate();
   };
 
@@ -35,7 +45,7 @@ export default class PostComment extends Component {
               onChange={this.handleChange}
               value={this.state.body}
             />
-            <input type="submit" value="Post" />
+            <input type="submit" value="Post" disabled={!this.state.body} />
           </form>
         )}
         {!this.props.loggedInUser && (

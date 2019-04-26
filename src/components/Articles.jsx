@@ -5,6 +5,7 @@ import ArticleListCard from './ArticleListCard';
 import TopicCard from './TopicCard';
 import SubHeader from './SubHeader';
 import ArticleNavigation from './ArticleNavigation';
+import { navigate } from '@reach/router';
 
 export default class Articles extends Component {
   state = {
@@ -28,9 +29,18 @@ export default class Articles extends Component {
   };
 
   componentDidMount() {
-    fetchArticles().then(({ data: { total_count, articles, article } }) => {
-      this.setState({ articles: articles || [article], total_count });
-    });
+    fetchArticles()
+      .then(({ data: { total_count, articles, article } }) => {
+        this.setState({ articles: articles || [article], total_count });
+      })
+      .catch(err => {
+        navigate('/error', {
+          replace: true,
+          state: {
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -49,9 +59,18 @@ export default class Articles extends Component {
       };
       if (this.props.slug) params.topic = this.props.slug;
 
-      fetchArticles(params).then(({ data: { total_count, articles } }) => {
-        this.setState({ articles, total_count, p: page });
-      });
+      fetchArticles(params)
+        .then(({ data: { total_count, articles } }) => {
+          this.setState({ articles, total_count, p: page });
+        })
+        .catch(err => {
+          navigate('/error', {
+            replace: true,
+            state: {
+              msg: err.response.data.msg
+            }
+          });
+        });
     }
   }
 
