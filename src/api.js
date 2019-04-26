@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://n-c-news.herokuapp.com/api';
+const url = 'https://n-c-news.herokuapp.com/api';
 
 export const fetchArticles = params => {
   let paramString = '';
