@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import '../styles/ArticleListCard.css';
 import VotePanel from './VotePanel';
 
-const ArticleCard = props => {
+const ArticleListCard = props => {
   return (
     <div className="article-list-card content-card">
       <VotePanel item={props.article} loggedInUser={props.loggedInUser} />
@@ -26,4 +26,4 @@ const ArticleCard = props => {
   );
 };
 
-export default ArticleCard;
+export default ArticleListCard;

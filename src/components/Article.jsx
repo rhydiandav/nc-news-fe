@@ -96,6 +96,7 @@ export default class Article extends Component {
           handleDelete={this.handleDelete}
           loggedInUser={this.props.loggedInUser}
         />
+
         <div className="content-card">
           <h3>Comments:</h3>
           {this.state.p !== 1 && (
@@ -103,12 +104,12 @@ export default class Article extends Component {
               Prev Page
             </button>
           )}
-          {this.state.p !==
-            Math.ceil(this.state.article.comment_count / 10) && (
-            <button onClick={() => this.handlePageChangeClick(1)}>
-              Next Page
-            </button>
-          )}
+          {this.state.p !== Math.ceil(this.state.article.comment_count / 10) &&
+            this.state.article.comment_count !== 0 && (
+              <button onClick={() => this.handlePageChangeClick(1)}>
+                Next Page
+              </button>
+            )}
         </div>
         <Comments
           comments={this.state.comments}
