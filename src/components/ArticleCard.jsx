@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import '../styles/ArticleCard.css';
 
 const ArticleCard = props => {
   return (
-    <div className="article content-card">
+    <div className="article-details content-card">
       <p>
         Posted by{' '}
         <Link to={`/users/${props.article.author}`}>

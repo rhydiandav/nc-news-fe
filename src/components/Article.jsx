@@ -33,7 +33,9 @@ export default class Article extends Component {
         navigate('/error', {
           replace: true,
           state: {
-            msg: err.response.data.msg
+            msg: err.response.data.msg,
+            status: err.response.status,
+            value: this.props.id
           }
         });
       });

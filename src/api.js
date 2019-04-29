@@ -3,18 +3,9 @@ import axios from 'axios';
 const url = 'https://n-c-news.herokuapp.com/api';
 
 export const fetchArticles = params => {
-  let paramString = '';
-
-  if (params) {
-    paramString = paramString + '?';
-
-    for (let key in params) {
-      paramString = paramString + key + '=' + params[key] + '&';
-    }
-
-    paramString = paramString.slice(0, -1);
-  }
-  return axios.get(`${url}/articles${paramString}`);
+  return axios.get(`${url}/articles`, {
+    params
+  });
 };
 
 export const fetchArticle = articleId => {
@@ -45,6 +36,10 @@ export const postNewUser = user => {
   return axios.post(`${url}/users`, user).then(({ data: { user } }) => {
     return user;
   });
+};
+
+export const deleteUser = username => {
+  return axios.delete(`${url}/users/${username}`);
 };
 
 export const vote = (item, amount) => {

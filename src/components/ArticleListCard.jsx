@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import '../index.css';
-import '../styles/ArticleCard.css';
+import '../styles/ArticleListCard.css';
 import VotePanel from './VotePanel';
 
 const ArticleCard = props => {

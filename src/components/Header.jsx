@@ -51,47 +51,36 @@ export default class Header extends Component {
             );
           })}
         </select>
+        <div className="account-buttons">
+          {!this.props.loggedInUser && (
+            <>
+              <Link to="/users/new">
+                <button className="red-button">Sign Up</button>
+              </Link>
 
-        {!this.props.loggedInUser && (
-          <div className="account-buttons">
-            <button
-              className="red-button"
-              onClick={() => {
-                navigate('/users/new');
-              }}
-            >
-              Sign Up
-            </button>
-            <button
-              className="black-button"
-              onClick={() => {
-                navigate('/login');
-              }}
-            >
-              Log In
-            </button>
-          </div>
-        )}
-        {this.props.loggedInUser && (
-          <div className="account-buttons">
-            <button
-              className="black-button"
-              onClick={() => {
-                navigate(`/users/${this.props.loggedInUser}`);
-              }}
-            >
-              <i className="fas fa-user" /> {this.props.loggedInUser}
-            </button>
-            <button
-              className="black-button"
-              onClick={() => {
-                this.props.logOut();
-              }}
-            >
-              Log Out
-            </button>
-          </div>
-        )}
+              <Link to="/login">
+                <button className="black-button">Log In</button>
+              </Link>
+            </>
+          )}
+          {this.props.loggedInUser && (
+            <>
+              <Link to={`/users/${this.props.loggedInUser}`}>
+                <button className="black-button">
+                  <i className="fas fa-user" /> {this.props.loggedInUser}
+                </button>
+              </Link>
+              <button
+                className="black-button"
+                onClick={() => {
+                  this.props.logOut();
+                }}
+              >
+                Log Out
+              </button>
+            </>
+          )}
+        </div>
       </div>
     );
   }

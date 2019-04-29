@@ -15,7 +15,7 @@ import Error from './components/Error';
 class App extends React.Component {
   state = {
     currentTopic: 'front-page',
-    loggedInUser: localStorage.loggedInUser || ''
+    loggedInUser: ''
   };
 
   setCurrentTopic = currentTopic => {
@@ -31,6 +31,11 @@ class App extends React.Component {
     this.setState({ loggedInUser: '' });
     localStorage.removeItem('loggedInUser');
   };
+
+  componentDidMount() {
+    localStorage.loggedInUser &&
+      this.setState({ loggedInUser: localStorage.loggedInUser });
+  }
 
   render() {
     return (

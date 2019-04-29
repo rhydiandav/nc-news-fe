@@ -76,13 +76,20 @@ export default class PostArticle extends Component {
               })}
             </select>
             Title:{' '}
-            <input type="text" name="title" onChange={this.handleChange} />
-            Body: <input type="text" name="body" onChange={this.handleChange} />
             <input
-              type="submit"
-              value="Post"
-              disabled={!this.state.title || !this.state.body}
+              type="text"
+              name="title"
+              onChange={this.handleChange}
+              required={true}
             />
+            Body:{' '}
+            <input
+              type="text"
+              name="body"
+              onChange={this.handleChange}
+              required={true}
+            />
+            <input type="submit" value="Post" />
           </form>
         </div>
       </>

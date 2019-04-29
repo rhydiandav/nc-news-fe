@@ -1,0 +1,16 @@
+.article-list-card {
+  width: 95%;
+  padding: 0%;
+  display: grid;
+  grid-template-columns: 5% 95%;
+}
+
+.article-details {
+  padding: 0.5%;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-list-card {
+    grid-template-columns: 3% 97%;
+  }
+}

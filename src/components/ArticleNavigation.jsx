@@ -1,17 +1,14 @@
 import React from 'react';
-import { navigate } from '@reach/router';
+import { Link } from '@reach/router';
 import '../styles/ArticleNavigation.css';
 
 const ArticleNavigation = props => {
   return (
     <div className="content-card article-navigation">
       {props.loggedInUser && (
-        <button
-          className="new-article"
-          onClick={() => navigate('/articles/new')}
-        >
-          New Article
-        </button>
+        <Link to="/articles/new">
+          <button className="new-article">New Article</button>
+        </Link>
       )}
 
       <div className="page-nav">
@@ -38,11 +35,11 @@ const ArticleNavigation = props => {
         <p>Sort by:</p>
 
         <select name="sort_by" onChange={props.handleSortByChange}>
-          <option value="created_at">Date Created</option>
+          <option value="created_at">Date</option>
           {!props.author && <option value="author">User</option>}
           <option value="title">Title</option>
-          <option value="comment_count">Number of Comments</option>
-          <option value="votes">Number of Votes</option>
+          <option value="comment_count">Comments</option>
+          <option value="votes">Votes</option>
         </select>
 
         <select name="order" onChange={props.handleOrderChange}>

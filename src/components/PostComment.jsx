@@ -44,8 +44,9 @@ export default class PostComment extends Component {
               name="body"
               onChange={this.handleChange}
               value={this.state.body}
+              required={true}
             />
-            <input type="submit" value="Post" disabled={!this.state.body} />
+            <input type="submit" value="Post" />
           </form>
         )}
         {!this.props.loggedInUser && (
