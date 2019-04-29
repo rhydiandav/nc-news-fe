@@ -7,7 +7,7 @@ import { fetchComments, fetchArticle, deleteArticle } from '../api';
 import { navigate } from '@reach/router';
 
 export default class Article extends Component {
-  state = { comments: [], commentsUpdated: false, p: 1, article: {} };
+  state = { comments: [], commentsUpdated: false, p: 1, article: [] };
 
   handleDelete = e => {
     deleteArticle(this.props.id)
@@ -27,7 +27,7 @@ export default class Article extends Component {
   componentDidMount() {
     fetchArticle(this.props.id)
       .then(({ data: { article } }) => {
-        this.setState({ article });
+        this.setState({ article: [article] });
       })
       .catch(err => {
         navigate('/error', {
@@ -91,11 +91,17 @@ export default class Article extends Component {
     return (
       <>
         <SubHeader topic="Article" />
-        <ArticleCard
-          article={this.state.article}
-          handleDelete={this.handleDelete}
-          loggedInUser={this.props.loggedInUser}
-        />
+
+        {this.state.article.map(article => {
+          return (
+            <ArticleCard
+              key={article.article_id}
+              article={article}
+              handleDelete={this.handleDelete}
+              loggedInUser={this.props.loggedInUser}
+            />
+          );
+        })}
 
         <div className="content-card">
           <h3>Comments:</h3>
