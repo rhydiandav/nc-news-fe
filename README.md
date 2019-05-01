@@ -1,6 +1,6 @@
 # NC News
 
-NC News is a social news aggregation, web content rating, and discussion website, similar to [Reddit](https://www.reddit.com)
+NC News is a social news aggregation, web content rating, and discussion website, similar to [Reddit](https://www.reddit.com).
 
 NC News has articles which are divided in to topics. Each article has a rating that users can vote on using the API. Users can leave comments on articles, which have their own ratings that can also be voted on.
 
@@ -20,7 +20,7 @@ To run the app locally, please clone this repo, then `cd` in to the directory an
 
 - `git clone https://github.com/rhydiandav/nc-news-fe.git`
 - `cd nc-news-fe`
-- `npm i`
+- `npm install`
 - `npm start`
 
 ## Built Using
