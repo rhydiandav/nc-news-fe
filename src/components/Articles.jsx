@@ -5,10 +5,12 @@ import ArticleListCard from './ArticleListCard';
 import TopicCard from './TopicCard';
 import SubHeader from './SubHeader';
 import ArticleNavigation from './ArticleNavigation';
+import Loading from './Loading';
 import { navigate } from '@reach/router';
 
 export default class Articles extends Component {
   state = {
+    isLoading: true,
     articles: [],
     total_count: 0,
     p: 1,
@@ -31,7 +33,11 @@ export default class Articles extends Component {
   componentDidMount() {
     fetchArticles()
       .then(({ data: { total_count, articles, article } }) => {
-        this.setState({ articles: articles || [article], total_count });
+        this.setState({
+          isLoading: false,
+          articles: articles || [article],
+          total_count
+        });
       })
       .catch(err => {
         navigate('/error', {
@@ -79,8 +85,8 @@ export default class Articles extends Component {
     return (
       <>
         <SubHeader topic={this.props.slug || 'Front Page'} />
-
         <div className="articles">
+          {this.state.isLoading && <Loading />}
           <div className="sidebar">
             <TopicCard
               slug={slug}
